@@ -1,15 +1,9 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
-import { Container, Message } from './styles';
+import { Container } from './styles';
+import Message, { IMessage } from '../../components/Message';
 
-interface IMessage {
-  id: number;
-  content: string;
-  user: {
-    email: string;
-  };
-}
 
 const GET_ALL_MESSAGES = gql`
   query {
@@ -23,7 +17,7 @@ const GET_ALL_MESSAGES = gql`
   }
 `;
 
-export default function Board() {
+const Board: React.FC = () => {
   const { loading, data } = useQuery<{ getMessages: IMessage[] }>(
     GET_ALL_MESSAGES
   );
@@ -33,12 +27,10 @@ export default function Board() {
   return (
     <Container>
       {data?.getMessages.map(item => (
-        <Message key={item.id}>
-          <p>{item.content}</p>
-
-          <span>{item.user.email}</span>
-        </Message>
+        <Message item={item} />
       ))}
     </Container>
   );
 }
+
+export default Board;
