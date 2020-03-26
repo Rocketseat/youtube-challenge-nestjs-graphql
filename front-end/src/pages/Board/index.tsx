@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import { Container } from './styles';
 import Message, { IMessage } from '../../components/Message';
+import AddButton from '../../components/AddButton';
 
 
 const GET_ALL_MESSAGES = gql`
@@ -26,9 +27,11 @@ const Board: React.FC = () => {
 
   return (
     <Container>
-      {data?.getMessages.map(item => (
+      {data?.getMessages.map((item: IMessage) => (
         <Message item={item} />
       ))}
+      <AddButton />
+
     </Container>
   );
 }
