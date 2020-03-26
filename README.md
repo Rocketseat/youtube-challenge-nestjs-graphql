@@ -28,9 +28,9 @@ Code Challenge - NestJS + TypeORM + GraphQL
 - [x] User register with e-mail only
 - [x] User login with e-mail only
 - [x] User need to be able to post messages on the Board (Back-end)
-- [ ] User need to be able to post messages on the Board (Front-end)
+- [x] User need to be able to post messages on the Board (Front-end)
 - [x] (optional) User need to be able to delete messages (Back-end)
-- [ ] (optional) User need to be able to delete messages (Front-end)
+- [x] (optional) User need to be able to delete messages (Front-end)
 - [x] New messages can be listed at real time (Back-end)
 - [ ] New messages can be listed at real time (Front-end)
 - [ ] Add Swagger support
