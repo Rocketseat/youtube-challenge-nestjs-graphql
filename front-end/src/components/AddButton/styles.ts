@@ -10,6 +10,7 @@ export const Container = styled.button`
 	align-items: center;
 	justify-content: center;
 	margin-top: 20px;
+	margin-bottom: 20px;
 	transition: 0.5s border;
 	&:hover {
 		border: 2px solid #9878ff;

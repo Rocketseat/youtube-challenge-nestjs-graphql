@@ -22,7 +22,7 @@ interface User {
 	id: number;
 }
 
-export default function AddButton() {
+const AddButton: React.FC = () => {
 	const [ content, setContent ] = useState<string>('');
 	const [ create ] = useMutation(CREATE_MESSAGE);
 
@@ -42,6 +42,8 @@ export default function AddButton() {
 
 		try {
 			await create({ variables: { content, userId: id } });
+			toggleModal();
+			window.location.reload(false);
 		} catch (err) {
 			console.error(err);
 		}
@@ -61,4 +63,6 @@ export default function AddButton() {
 			</Modali.Modal>
 		</Container>
 	);
-}
+};
+
+export default AddButton;

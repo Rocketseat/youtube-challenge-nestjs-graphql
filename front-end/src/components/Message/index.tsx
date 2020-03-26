@@ -12,11 +12,11 @@ export interface IMessage {
 	};
 }
 
-interface Props {
+type Props = {
 	item: IMessage;
-}
+};
 
-export default function Message({ item }: Props) {
+const Message: React.FC<Props> = ({ item }) => {
 	return (
 		<Container key={item.id}>
 			<p>{item.content}</p>
@@ -29,4 +29,6 @@ export default function Message({ item }: Props) {
 			</div>
 		</Container>
 	);
-}
+};
+
+export default Message;

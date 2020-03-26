@@ -9,15 +9,15 @@ import Routes from './routes';
 import GlobalStyles from './styles/global';
 
 function App() {
-  return (
-    <ApolloProvider client={api}>
-      <Router history={history}>
-        <Routes />
+	return (
+		<ApolloProvider client={api}>
+			<Router history={history}>
+				<Routes />
 
-        <GlobalStyles />
-      </Router>
-    </ApolloProvider>
-  );
+				<GlobalStyles />
+			</Router>
+		</ApolloProvider>
+	);
 }
 
 export default App;
