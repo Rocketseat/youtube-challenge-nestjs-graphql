@@ -10,6 +10,10 @@ export const Container = styled.button`
 	align-items: center;
 	justify-content: center;
 	margin-top: 20px;
+	transition: 0.5s border;
+	&:hover {
+		border: 2px solid #9878ff;
+	}
 `;
 
 export const Content = styled.input`
@@ -17,4 +21,5 @@ export const Content = styled.input`
 	align-self: center;
 	width: 60%;
 	height: 30px;
+	margin: 20px;
 `;
