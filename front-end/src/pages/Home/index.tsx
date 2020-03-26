@@ -6,61 +6,75 @@ import { FaCheck } from 'react-icons/fa';
 import { Container, Button, Content, Input } from './styles';
 
 type Props = {
-  history: History;
+	history: History;
 };
 
 export const CREATE_OR_LOGIN_USER = gql`
-  mutation($email: String!) {
-    createOrLoginUser(data: { email: $email }) {
-      id
-    }
-  }
+	mutation($email: String!) {
+		createOrLoginUser(data: { email: $email }) {
+			id
+			content
+		}
+	}
 `;
 
 const Home: React.FC<Props> = ({ history }) => {
-  const [input, setInput] = useState<string>('');
+	const [ input, setInput ] = useState<string>('');
+	const [ email, setEmail ] = useState<string>('');
 
-  const [createOrLoginUser, { data }] = useMutation(CREATE_OR_LOGIN_USER);
+	const [ createOrLoginUser, { data } ] = useMutation(CREATE_OR_LOGIN_USER);
 
-  useEffect(() => {
-    if (data) {
-      const { createOrLoginUser } = data;
-      const { id } = createOrLoginUser;
+	useEffect(
+		() => {
+			if (data) {
+				const { createOrLoginUser } = data;
+				const { id } = createOrLoginUser;
 
-      history.push(`/dashboard?id=${id}`);
-    }
-  }, [data]);
+				saveUserToLocalStorage(email, id);
 
-  async function handleRegister(e: React.MouseEvent) {
-    e.preventDefault();
+				history.push(`/dashboard?id=${id}`);
+			}
+		},
+		[ data, history, email ]
+	);
 
-    if (input.length < 1) {
-      alert('Insert a valid e-mail!');
-      return;
-    }
+	async function saveUserToLocalStorage(email: string, id: number) {
+		localStorage.setItem(
+			'user',
+			JSON.stringify({
+				email,
+				id
+			})
+		);
+	}
 
-    createOrLoginUser({ variables: { email: input } });
-    setInput('');
-  }
+	async function handleRegister(e: React.MouseEvent) {
+		e.preventDefault();
 
-  return (
-    <Container>
-      <Content>
-        <form>
-          <Input
-            value={input}
-            onChange={e => setInput(e.target.value)}
-            placeholder="E-mail"
-          />
+		if (input.length < 1) {
+			alert('Insert a valid e-mail!');
+			return;
+		}
 
-          <Button onClick={handleRegister}>
-            <FaCheck size={36} color="#fff" />
-            <span>Login or Register</span>
-          </Button>
-        </form>
-      </Content>
-    </Container>
-  );
+		createOrLoginUser({ variables: { email: input } });
+		setEmail(input);
+		setInput('');
+	}
+
+	return (
+		<Container>
+			<Content>
+				<form>
+					<Input value={input} onChange={(e) => setInput(e.target.value)} placeholder="E-mail" />
+
+					<Button onClick={handleRegister}>
+						<FaCheck size={36} color="#fff" />
+						<span>Login or Register</span>
+					</Button>
+				</form>
+			</Content>
+		</Container>
+	);
 };
 
 export default Home;

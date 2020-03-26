@@ -28,7 +28,7 @@ const Board: React.FC = () => {
   return (
     <Container>
       {data?.getMessages.map((item: IMessage) => (
-        <Message item={item} />
+        <Message key={item.id} item={item} />
       ))}
       <AddButton />
 
